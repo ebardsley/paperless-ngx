@@ -16,6 +16,7 @@ from documents.settings import EXPORTER_FILE_NAME
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
+from documents.tests.utils import skip_if_root
 
 
 class TestCommandImport(
@@ -97,6 +98,7 @@ class TestCommandImport(
             )
         self.assertIn('The manifest file refers to "noexist.pdf"', str(e.exception))
 
+    @skip_if_root
     def test_import_permission_error(self):
         """
         GIVEN:
@@ -151,6 +153,7 @@ class TestCommandImport(
             call_command("document_importer", Path("/tmp/notapath"))
         self.assertIn("That path doesn't exist", str(cm.exception))
 
+    @skip_if_root
     def test_import_source_not_readable(self):
         """
         GIVEN:

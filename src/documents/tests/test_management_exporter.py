@@ -42,6 +42,7 @@ from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
 from documents.tests.utils import paperless_environment
+from documents.tests.utils import skip_if_root
 from paperless_mail.models import MailAccount
 
 
@@ -591,6 +592,7 @@ class TestExportImport(
 
             self.assertEqual("That path isn't a directory", str(e.exception))
 
+    @skip_if_root
     def test_export_target_not_writable(self):
         """
         GIVEN:
